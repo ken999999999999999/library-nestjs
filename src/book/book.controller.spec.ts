@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BookController } from './book.controller';
 import { BookService } from './book.service';
 
-describe('AppController', () => {
+describe('BookController', () => {
   let bookController: BookController;
 
   beforeEach(async () => {
@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(bookController.getHello()).toBe('Hello World!');
+      expect(bookController.getBooks()).toBe('Books');
     });
   });
 });
