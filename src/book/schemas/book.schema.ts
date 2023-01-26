@@ -21,4 +21,4 @@ export class Book {
   ISBN: string;
 }
 
-export const CatSchema = SchemaFactory.createForClass(Book);
+export const BookSchema = SchemaFactory.createForClass(Book);
