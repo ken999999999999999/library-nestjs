@@ -16,9 +16,6 @@ export class Book {
 
   @Prop()
   author: string;
-
-  @Prop()
-  ISBN: string;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);
