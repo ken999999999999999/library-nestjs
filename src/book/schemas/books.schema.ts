@@ -9,10 +9,10 @@ export class Book {
   name: string;
 
   @Prop()
-  Publisher: string;
+  publisher: string;
 
   @Prop()
-  Release: Date;
+  release: Date;
 
   @Prop()
   author: string;
