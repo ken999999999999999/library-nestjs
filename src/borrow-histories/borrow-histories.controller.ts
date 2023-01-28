@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { BorrowHistoriesService } from './borrow-histories.service';
 import { CreateBorrowHistoryDto } from './dto/create-borrow-history.dto';
+import { ViewBorrowHistoryDto } from './dto/view-borrow-history.dto';
 import { BorrowHistory } from './schemas/borrow-history.schemas';
 
 @Controller('borrow-histories')
@@ -14,7 +15,7 @@ export class BorrowHistoriesController {
   }
 
   @Get()
-  async findAll(): Promise<BorrowHistory[]> {
+  async findAll(): Promise<ViewBorrowHistoryDto[]> {
     return this.borrowHistoriesService.findAll();
   }
 

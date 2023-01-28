@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BorrowHistoriesController } from './borrow-histories.controller';
+import { BorrowHistoriesProfile } from './borrow-histories.profile';
 import { BorrowHistoriesService } from './borrow-histories.service';
 import {
   BorrowHistory,
@@ -14,6 +15,6 @@ import {
     ]),
   ],
   controllers: [BorrowHistoriesController],
-  providers: [BorrowHistoriesService],
+  providers: [BorrowHistoriesService, BorrowHistoriesProfile],
 })
 export class BorrowHistoriesModule {}
