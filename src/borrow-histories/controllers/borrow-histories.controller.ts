@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { BorrowHistoriesService } from './borrow-histories.service';
-import { CreateBorrowHistoryDto } from './dto/create-borrow-history.dto';
-import { ViewBorrowHistoryDto } from './dto/view-borrow-history.dto';
+import { BorrowHistoriesService } from '../services/borrow-histories.service';
+import { CreateBorrowHistoryDto } from '../dto/create-borrow-history.dto';
+import { ViewBorrowHistoryDto } from '../dto/view-borrow-history.dto';
 
 @Controller('borrow-histories')
 @ApiTags('borrow-histories')

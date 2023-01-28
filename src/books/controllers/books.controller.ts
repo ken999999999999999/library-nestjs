@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { BooksService } from '@/books/books.service';
+import { BooksService } from '@/books/services/books.service';
 import { CreateBookDto } from '@/books//dto/create-book.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ViewBookDto } from './dto/view-book.dto';
+import { ViewBookDto } from '../dto/view-book.dto';
 
 @Controller('books')
 @ApiTags('books')

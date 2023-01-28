@@ -3,13 +3,13 @@ import { InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateBorrowHistoryDto } from './dto/create-borrow-history.dto';
-import { ViewBorrowHistoryDto } from './dto/view-borrow-history.dto';
+import { CreateBorrowHistoryDto } from '../dto/create-borrow-history.dto';
+import { ViewBorrowHistoryDto } from '../dto/view-borrow-history.dto';
 
 import {
   BorrowHistory,
   BorrowHistoryDocument,
-} from './schemas/borrow-history.schema';
+} from '../schemas/borrow-history.schema';
 
 @Injectable()
 export class BorrowHistoriesService {

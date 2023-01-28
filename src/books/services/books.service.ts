@@ -5,7 +5,7 @@ import { CreateBookDto } from '@/books/dto/create-book.dto';
 import { Book, BookDocument } from '@/books/schemas/book.schema';
 import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
-import { ViewBookDto } from './dto/view-book.dto';
+import { ViewBookDto } from '../dto/view-book.dto';
 
 @Injectable()
 export class BooksService {

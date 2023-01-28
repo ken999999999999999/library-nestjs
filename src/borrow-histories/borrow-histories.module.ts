@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BorrowHistoriesController } from './borrow-histories.controller';
+import { BorrowHistoriesController } from './controllers/borrow-histories.controller';
 import { BorrowHistoriesProfile } from './borrow-histories.profile';
-import { BorrowHistoriesService } from './borrow-histories.service';
+import { BorrowHistoriesService } from './services/borrow-histories.service';
 import {
   BorrowHistory,
   BorrowHistorySchema,
