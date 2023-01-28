@@ -5,17 +5,22 @@ export type BookDocument = HydratedDocument<Book>;
 
 @Schema()
 export class Book {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true })
   publisher: string;
 
-  @Prop()
+  @Prop({ required: true })
   release: Date;
 
-  @Prop()
+  @Prop({ required: true })
   author: string;
+
+  @Prop({ required: true })
+  ISBN: string;
+
+  static viewProps = ['name', 'publisher', 'release'];
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);
