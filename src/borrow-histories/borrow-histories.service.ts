@@ -21,11 +21,14 @@ export class BorrowHistoriesService {
 
   async create(
     createBorrowHistoryDto: CreateBorrowHistoryDto,
-  ): Promise<BorrowHistory> {
-    const createdBorrowHistory = await this._borrowHistoryModel.create({
-      book: createBorrowHistoryDto.bookId,
-    });
-    return createdBorrowHistory;
+  ): Promise<ViewBorrowHistoryDto> {
+    return this._mapper.mapAsync(
+      await this._borrowHistoryModel.create({
+        book: createBorrowHistoryDto.bookId,
+      }),
+      BorrowHistory,
+      ViewBorrowHistoryDto,
+    );
   }
 
   async findAll(): Promise<ViewBorrowHistoryDto[]> {
@@ -36,14 +39,15 @@ export class BorrowHistoriesService {
     );
   }
 
-  async findOne(id: string): Promise<BorrowHistory> {
-    return this._borrowHistoryModel.findOne({ _id: id }).exec();
+  async findOne(id: string): Promise<ViewBorrowHistoryDto> {
+    return this._mapper.mapAsync(
+      await this._borrowHistoryModel.findOne({ _id: id }),
+      BorrowHistory,
+      ViewBorrowHistoryDto,
+    );
   }
 
   async delete(id: string) {
-    const deletedBorrowHistory = await this._borrowHistoryModel
-      .findByIdAndRemove({ _id: id })
-      .exec();
-    return deletedBorrowHistory;
+    return this._borrowHistoryModel.findByIdAndRemove({ _id: id }).exec();
   }
 }
