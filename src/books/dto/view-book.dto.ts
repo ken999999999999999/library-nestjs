@@ -1,6 +1,7 @@
+import { BaseDto } from '@/base.dto';
 import { AutoMap } from '@automapper/classes';
 
-export class ViewBookDto {
+export class ViewBookDto extends BaseDto {
   @AutoMap()
   name: string;
 

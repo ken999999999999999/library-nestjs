@@ -9,7 +9,7 @@ import { ViewBorrowHistoryDto } from './dto/view-borrow-history.dto';
 import {
   BorrowHistory,
   BorrowHistoryDocument,
-} from './schemas/borrow-history.schemas';
+} from './schemas/borrow-history.schema';
 
 @Injectable()
 export class BorrowHistoriesService {

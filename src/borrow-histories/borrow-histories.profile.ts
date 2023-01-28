@@ -1,7 +1,7 @@
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { createMap, Mapper } from '@automapper/core';
 import { Injectable } from '@nestjs/common';
-import { BorrowHistory } from './schemas/borrow-history.schemas';
+import { BorrowHistory } from './schemas/borrow-history.schema';
 import { ViewBorrowHistoryDto } from './dto/view-borrow-history.dto';
 
 @Injectable()

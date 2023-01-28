@@ -1,3 +1,4 @@
+import { BaseSchema } from '@/base.schemas';
 import { AutoMap } from '@automapper/classes';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
@@ -5,7 +6,7 @@ import { HydratedDocument } from 'mongoose';
 export type BookDocument = HydratedDocument<Book>;
 
 @Schema()
-export class Book {
+export class Book extends BaseSchema {
   @AutoMap()
   @Prop({ required: true })
   name: string;

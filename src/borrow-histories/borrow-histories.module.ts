@@ -6,7 +6,7 @@ import { BorrowHistoriesService } from './borrow-histories.service';
 import {
   BorrowHistory,
   BorrowHistorySchema,
-} from './schemas/borrow-history.schemas';
+} from './schemas/borrow-history.schema';
 
 @Module({
   imports: [
