@@ -30,7 +30,7 @@ export class BorrowHistoriesService {
 
   async findAll(): Promise<ViewBorrowHistoryDto[]> {
     return this._mapper.mapArrayAsync(
-      await this._borrowHistoryModel.find(),
+      await this._borrowHistoryModel.find().populate('book'),
       BorrowHistory,
       ViewBorrowHistoryDto,
     );

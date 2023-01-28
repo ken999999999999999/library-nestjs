@@ -1,4 +1,3 @@
-import { ViewBookDto } from '@/books/dto/view-book.dto';
 import { Book } from '@/books/schemas/book.schema';
 import { AutoMap } from '@automapper/classes';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
@@ -8,7 +7,7 @@ export type BorrowHistoryDocument = HydratedDocument<BorrowHistory>;
 
 @Schema()
 export class BorrowHistory {
-  @AutoMap(() => ViewBookDto)
+  @AutoMap(() => Book)
   @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Book' })
   book: Book;
 
