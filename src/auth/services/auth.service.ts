@@ -5,12 +5,14 @@ import { UsersService } from '@/users/services/users.service';
 import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { SignInDto } from '../dto/sign-in.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
+    private jwtService: JwtService,
     @InjectMapper() private readonly _mapper: Mapper,
   ) {}
 
@@ -26,5 +28,11 @@ export class AuthService {
 
   async signUp(createUserDto: CreateUserDto): Promise<ViewUserDto> {
     return this.usersService.create(createUserDto);
+  }
+
+  async login(username: string, userId: string) {
+    return {
+      access_token: this.jwtService.sign({ username, sub: userId }),
+    };
   }
 }

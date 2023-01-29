@@ -40,7 +40,8 @@ export class User extends BaseSchema {
   }
 
   private async setPassword(password: string): Promise<void> {
-    this.password = await bcrypt.hash(password, await bcrypt.genSalt());
+    const round = 10;
+    this.password = await bcrypt.hash(password, await bcrypt.genSalt(round));
   }
 
   public static isPasswordMatch(
