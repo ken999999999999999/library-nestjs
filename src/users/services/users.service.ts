@@ -16,17 +16,14 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<ViewUserDto> {
-    return this._mapper.mapAsync(
-      await this._userModel.create(
-        new User(
-          createUserDto.username,
-          createUserDto.email,
-          createUserDto.password,
-        ),
+    const user = await this._userModel.create(
+      new User(
+        createUserDto.username,
+        createUserDto.email,
+        createUserDto.password,
       ),
-      User,
-      ViewUserDto,
     );
+    return this._mapper.mapAsync(user, User, ViewUserDto);
   }
 
   async findOne(username: string): Promise<User> {

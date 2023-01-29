@@ -5,7 +5,7 @@ import { CreateBorrowHistoryDto } from '../dto/create-borrow-history.dto';
 import { ViewBorrowHistoryDto } from '../dto/view-borrow-history.dto';
 
 @Controller('borrow-histories')
-@ApiTags('borrow-histories')
+@ApiTags('BorrowHistory')
 export class BorrowHistoriesController {
   constructor(
     private readonly borrowHistoriesService: BorrowHistoriesService,

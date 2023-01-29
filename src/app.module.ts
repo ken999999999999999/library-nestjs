@@ -5,8 +5,8 @@ import { BorrowHistoriesModule } from '@/borrow-histories/borrow-histories.modul
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { UsersModule } from '@/users/users.module';
+import { AuthModule } from '@/auth/auth.module';
 
 let envFilePath = '.env.development';
 

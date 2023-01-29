@@ -5,7 +5,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ViewBookDto } from '../dto/view-book.dto';
 
 @Controller('books')
-@ApiTags('books')
+@ApiTags('Book')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
