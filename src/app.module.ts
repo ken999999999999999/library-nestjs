@@ -6,6 +6,7 @@ import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 let envFilePath = '.env.development';
 
@@ -23,12 +24,16 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
     MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING, {
       connectionFactory: (connection) => {
         connection.plugin(require('mongoose-autopopulate'));
+        connection.plugin((schema) => {
+          schema.timestamps = true;
+        });
         return connection;
       },
     }),
     BooksModule,
     BorrowHistoriesModule,
     UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
