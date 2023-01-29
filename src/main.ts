@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('Library System with NestJS')
     .setDescription('Library System API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

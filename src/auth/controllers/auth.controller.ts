@@ -1,13 +1,14 @@
 import { CreateUserDto } from '@/users/dto/create-user.dto';
 import { ViewUserDto } from '@/users/dto/view-user.dto';
 import { SignInDto } from '@/auth/dto/sign-in.dto';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Post, UseGuards } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
 import { AuthService } from '@/auth/services/auth.service';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
-
+import { Public } from '../../decorators/public.decorator';
+import { Controller } from '@/decorators/controller.decorator';
 @Controller('auth')
-@ApiTags('Auth')
+@Public()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

@@ -35,10 +35,15 @@ export class AuthService {
     return {
       username: user.username,
       email: user.email,
-      accessToken: this.jwtService.sign({
-        username: user.username,
-        sub: user._id,
-      }),
+      accessToken: this.jwtService.sign(
+        {
+          username: user.username,
+          sub: user._id,
+        },
+        {
+          secret: process.env.SECRET_KEY,
+        },
+      ),
     };
   }
 }
