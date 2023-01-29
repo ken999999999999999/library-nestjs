@@ -6,13 +6,11 @@ import { Book, BookDocument } from '@/books/schemas/book.schema';
 import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
 import { ViewBookDto } from '../dto/view-book.dto';
-import { CurrentUserService } from '@/users/services/current-user.service';
 
 @Injectable()
 export class BooksService {
   constructor(
     @InjectModel(Book.name) private readonly _bookModel: Model<BookDocument>,
-    private _currentUsersService: CurrentUserService,
     @InjectMapper() private readonly _mapper: Mapper,
   ) {}
 
@@ -25,7 +23,6 @@ export class BooksService {
   }
 
   async findAll(): Promise<ViewBookDto[]> {
-    console.log(this._currentUsersService.userId);
     return this._mapper.mapArrayAsync(
       await this._bookModel.find().exec(),
       Book,

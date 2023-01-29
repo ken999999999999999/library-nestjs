@@ -1,3 +1,4 @@
+import { CurrentUserService } from '@/users/services/current-user.service';
 import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
@@ -16,6 +17,7 @@ export class BorrowHistoriesService {
   constructor(
     @InjectModel(BorrowHistory.name)
     private readonly _borrowHistoryModel: Model<BorrowHistoryDocument>,
+    private readonly _currentUserService: CurrentUserService,
     @InjectMapper() private readonly _mapper: Mapper,
   ) {}
 
@@ -25,6 +27,7 @@ export class BorrowHistoriesService {
     return this._mapper.mapAsync(
       await this._borrowHistoryModel.create({
         book: createBorrowHistoryDto.bookId,
+        borrowedBy: this._currentUserService.userId,
       }),
       BorrowHistory,
       ViewBorrowHistoryDto,
@@ -33,7 +36,9 @@ export class BorrowHistoriesService {
 
   async findAll(): Promise<ViewBorrowHistoryDto[]> {
     return this._mapper.mapArrayAsync(
-      await this._borrowHistoryModel.find(),
+      await this._borrowHistoryModel.find<BorrowHistory>({
+        borrowedBy: this._currentUserService.userId,
+      }),
       BorrowHistory,
       ViewBorrowHistoryDto,
     );
@@ -41,7 +46,10 @@ export class BorrowHistoriesService {
 
   async findOne(id: string): Promise<ViewBorrowHistoryDto> {
     return this._mapper.mapAsync(
-      await this._borrowHistoryModel.findOne({ _id: id }),
+      await this._borrowHistoryModel.findOne({
+        _id: id,
+        borrowedBy: this._currentUserService.userId,
+      }),
       BorrowHistory,
       ViewBorrowHistoryDto,
     );

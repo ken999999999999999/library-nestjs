@@ -1,5 +1,6 @@
 import { BaseSchema } from '@/base.schemas';
 import { Book } from '@/books/schemas/book.schema';
+import { User } from '@/users/schemas/user.schema';
 import { AutoMap } from '@automapper/classes';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
@@ -12,10 +13,19 @@ export class BorrowHistory extends BaseSchema {
   @Prop({
     required: true,
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Book',
+    ref: Book.name,
     autopopulate: true,
   })
   book: Book;
+
+  @AutoMap(() => User)
+  @Prop({
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User.name,
+    autopopulate: true,
+  })
+  borrowedBy: User;
 
   @AutoMap()
   @Prop({ required: true, default: Date.now() })

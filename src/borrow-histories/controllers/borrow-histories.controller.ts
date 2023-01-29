@@ -4,6 +4,7 @@ import { BorrowHistoriesService } from '../services/borrow-histories.service';
 import { CreateBorrowHistoryDto } from '../dto/create-borrow-history.dto';
 import { ViewBorrowHistoryDto } from '../dto/view-borrow-history.dto';
 import { Controller } from '@/decorators/controller.decorator';
+
 @Controller('borrow-histories')
 export class BorrowHistoriesController {
   constructor(
