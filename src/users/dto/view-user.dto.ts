@@ -9,4 +9,7 @@ export class ViewUserDto {
   @ApiProperty()
   @AutoMap()
   email: string;
+
+  @ApiProperty()
+  accessToken?: string;
 }

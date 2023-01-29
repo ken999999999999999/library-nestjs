@@ -30,9 +30,15 @@ export class AuthService {
     return this.usersService.create(createUserDto);
   }
 
-  async login(username: string, userId: string) {
+  async login(username: string): Promise<ViewUserDto> {
+    const user = await this.usersService.findOne(username);
     return {
-      access_token: this.jwtService.sign({ username, sub: userId }),
+      username: user.username,
+      email: user.email,
+      accessToken: this.jwtService.sign({
+        username: user.username,
+        sub: user._id,
+      }),
     };
   }
 }

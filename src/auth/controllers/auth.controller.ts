@@ -4,7 +4,7 @@ import { SignInDto } from '@/auth/dto/sign-in.dto';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from '@/auth/services/auth.service';
-import { LocalAuthGuard } from '../local-auth.guard';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
 
 @Controller('auth')
 @ApiTags('Auth')
@@ -21,6 +21,6 @@ export class AuthController {
   @Post('sign-in')
   @ApiResponse({ type: ViewUserDto })
   async getUser(@Body() signInDto: SignInDto): Promise<ViewUserDto> {
-    return await this.authService.validateUser(signInDto);
+    return this.authService.login(signInDto.username);
   }
 }
