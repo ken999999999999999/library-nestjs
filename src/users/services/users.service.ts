@@ -11,13 +11,13 @@ import { User, UserDocument } from '../schemas/user.schema';
 export class UsersService {
   constructor(
     @InjectModel(User.name)
-    private readonly _borrowHistoryModel: Model<UserDocument>,
+    private readonly _userModel: Model<UserDocument>,
     @InjectMapper() private readonly _mapper: Mapper,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<ViewUserDto> {
     return this._mapper.mapAsync(
-      await this._borrowHistoryModel.create(
+      await this._userModel.create(
         new User(
           createUserDto.username,
           createUserDto.email,
@@ -27,5 +27,9 @@ export class UsersService {
       User,
       ViewUserDto,
     );
+  }
+
+  async findOne(username: string): Promise<User> {
+    return this._userModel.findOne<User>({ username }).exec();
   }
 }

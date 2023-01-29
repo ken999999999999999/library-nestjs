@@ -10,11 +10,11 @@ export type UserDocument = HydratedDocument<User>;
 export class User extends BaseSchema {
   @AutoMap()
   @Prop({ required: true, unique: true, trim: true })
-  private username: string;
+  username: string;
 
   @AutoMap()
   @Prop({ required: true, unique: true, trim: true })
-  private email: string;
+  email: string;
 
   @Prop({ required: true, unique: true })
   private _normalizedEmail: string;
@@ -38,7 +38,7 @@ export class User extends BaseSchema {
     this.password = await bcrypt.hash(password, await bcrypt.genSalt());
   }
 
-  public async isPassowrdMatch(password: string): Promise<boolean> {
+  public async isPasswordMatch(password: string): Promise<boolean> {
     return await bcrypt.compare(password, this.password);
   }
 }
