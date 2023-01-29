@@ -24,9 +24,6 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
     MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING, {
       connectionFactory: (connection) => {
         connection.plugin(require('mongoose-autopopulate'));
-        connection.plugin((schema) => {
-          schema.timestamps = true;
-        });
         return connection;
       },
     }),

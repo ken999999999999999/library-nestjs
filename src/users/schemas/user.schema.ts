@@ -17,29 +17,37 @@ export class User extends BaseSchema {
   email: string;
 
   @Prop({ required: true, unique: true })
-  private _normalizedEmail: string;
+  normalizedEmail: string;
 
   @Prop({ required: true })
-  private password: string;
+  password: string;
 
-  constructor(username: string, email: string, password: string) {
+  constructor(username: string, email: string) {
     super();
     this.username = username;
     this.email = email;
-    this._normalizedEmail = this.email.toUpperCase();
-    this.setPassword(password);
+    this.normalizedEmail = this.email.toUpperCase();
   }
 
-  get normalizedEmail(): string {
-    return this._normalizedEmail;
+  public static async create(
+    username: string,
+    email: string,
+    password: string,
+  ): Promise<User> {
+    const user = new User(username, email);
+    await user.setPassword(password);
+    return user;
   }
 
   private async setPassword(password: string): Promise<void> {
     this.password = await bcrypt.hash(password, await bcrypt.genSalt());
   }
 
-  public async isPasswordMatch(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.password);
+  public static isPasswordMatch(
+    inputPassword: string,
+    userPassword: string,
+  ): Promise<boolean> {
+    return bcrypt.compare(inputPassword, userPassword);
   }
 }
 
