@@ -9,7 +9,12 @@ export type BorrowHistoryDocument = HydratedDocument<BorrowHistory>;
 @Schema()
 export class BorrowHistory extends BaseSchema {
   @AutoMap(() => Book)
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Book' })
+  @Prop({
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book',
+    autopopulate: true,
+  })
   book: Book;
 
   @AutoMap()

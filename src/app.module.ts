@@ -5,6 +5,7 @@ import { BorrowHistoriesModule } from '@/borrow-histories/borrow-histories.modul
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { ConfigModule } from '@nestjs/config';
+import { UsersModule } from './users/users.module';
 
 let envFilePath = '.env.development';
 
@@ -19,9 +20,15 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
     AutomapperModule.forRoot({
       strategyInitializer: classes(),
     }),
-    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING),
+    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING, {
+      connectionFactory: (connection) => {
+        connection.plugin(require('mongoose-autopopulate'));
+        return connection;
+      },
+    }),
     BooksModule,
     BorrowHistoriesModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
