@@ -47,7 +47,8 @@ export class BorrowHistoriesService {
     );
   }
 
-  async delete(id: string) {
-    return this._borrowHistoryModel.findByIdAndRemove({ _id: id }).exec();
+  async delete(id: string): Promise<void> {
+    this._borrowHistoryModel.findByIdAndRemove({ _id: id }).exec();
+    return;
   }
 }

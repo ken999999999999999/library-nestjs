@@ -32,8 +32,7 @@ export class BorrowHistoriesController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
-    this.borrowHistoriesService.delete(id);
-    return;
+  async delete(@Param('id') id: string): Promise<void> {
+    return this.borrowHistoriesService.delete(id);
   }
 }
