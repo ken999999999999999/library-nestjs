@@ -1,8 +1,8 @@
 import { Body, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import { BorrowHistoriesService } from '../services/borrow-histories.service';
-import { CreateBorrowHistoryDto } from '../dto/create-borrow-history.dto';
-import { ViewBorrowHistoryDto } from '../dto/view-borrow-history.dto';
+import { CreateBorrowHistoryCommand } from '../dto/create-borrow-history.command';
+import { BorrowHistoryVm } from '../dto/borrow-history.vm';
 import { Controller } from '@/decorators/controller.decorator';
 
 @Controller('borrow-histories')
@@ -12,22 +12,22 @@ export class BorrowHistoriesController {
   ) {}
 
   @Post()
-  @ApiResponse({ type: ViewBorrowHistoryDto })
+  @ApiResponse({ type: BorrowHistoryVm })
   async create(
-    @Body() createBorrowHistoryDto: CreateBorrowHistoryDto,
-  ): Promise<ViewBorrowHistoryDto> {
+    @Body() createBorrowHistoryDto: CreateBorrowHistoryCommand,
+  ): Promise<BorrowHistoryVm> {
     return await this.borrowHistoriesService.create(createBorrowHistoryDto);
   }
 
   @Get()
-  @ApiResponse({ type: [ViewBorrowHistoryDto] })
-  async findAll(): Promise<ViewBorrowHistoryDto[]> {
+  @ApiResponse({ type: [BorrowHistoryVm] })
+  async findAll(): Promise<BorrowHistoryVm[]> {
     return this.borrowHistoriesService.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({ type: ViewBorrowHistoryDto })
-  async findOne(@Param('id') id: string): Promise<ViewBorrowHistoryDto> {
+  @ApiResponse({ type: BorrowHistoryVm })
+  async findOne(@Param('id') id: string): Promise<BorrowHistoryVm> {
     return this.borrowHistoriesService.findOne(id);
   }
 

@@ -1,15 +1,15 @@
+import { AutoMap } from '@automapper/classes';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateUserDto {
+export class UserVm {
   @ApiProperty()
+  @AutoMap()
   username: string;
 
   @ApiProperty()
+  @AutoMap()
   email: string;
 
   @ApiProperty()
-  password: string;
-
-  @ApiProperty()
-  confirmPassword: string;
+  accessToken?: string;
 }

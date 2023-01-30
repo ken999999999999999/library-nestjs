@@ -4,8 +4,8 @@ import { InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateBorrowHistoryDto } from '../dto/create-borrow-history.dto';
-import { ViewBorrowHistoryDto } from '../dto/view-borrow-history.dto';
+import { CreateBorrowHistoryCommand } from '../dto/create-borrow-history.command';
+import { BorrowHistoryVm } from '../dto/borrow-history.vm';
 
 import {
   BorrowHistory,
@@ -22,36 +22,36 @@ export class BorrowHistoriesService {
   ) {}
 
   async create(
-    createBorrowHistoryDto: CreateBorrowHistoryDto,
-  ): Promise<ViewBorrowHistoryDto> {
+    createBorrowHistoryDto: CreateBorrowHistoryCommand,
+  ): Promise<BorrowHistoryVm> {
     return this._mapper.mapAsync(
       await this._borrowHistoryModel.create({
         book: createBorrowHistoryDto.bookId,
         borrowedBy: this._currentUserService.userId,
       }),
       BorrowHistory,
-      ViewBorrowHistoryDto,
+      BorrowHistoryVm,
     );
   }
 
-  async findAll(): Promise<ViewBorrowHistoryDto[]> {
+  async findAll(): Promise<BorrowHistoryVm[]> {
     return this._mapper.mapArrayAsync(
       await this._borrowHistoryModel.find<BorrowHistory>({
         borrowedBy: this._currentUserService.userId,
       }),
       BorrowHistory,
-      ViewBorrowHistoryDto,
+      BorrowHistoryVm,
     );
   }
 
-  async findOne(id: string): Promise<ViewBorrowHistoryDto> {
+  async findOne(id: string): Promise<BorrowHistoryVm> {
     return this._mapper.mapAsync(
       await this._borrowHistoryModel.findOne({
         _id: id,
         borrowedBy: this._currentUserService.userId,
       }),
       BorrowHistory,
-      ViewBorrowHistoryDto,
+      BorrowHistoryVm,
     );
   }
 

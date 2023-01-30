@@ -2,7 +2,7 @@ import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { createMap, Mapper } from '@automapper/core';
 import { Injectable } from '@nestjs/common';
 import { BorrowHistory } from './schemas/borrow-history.schema';
-import { ViewBorrowHistoryDto } from './dto/view-borrow-history.dto';
+import { BorrowHistoryVm } from './dto/borrow-history.vm';
 
 @Injectable()
 export class BorrowHistoriesProfile extends AutomapperProfile {
@@ -12,7 +12,7 @@ export class BorrowHistoriesProfile extends AutomapperProfile {
 
   override get profile() {
     return (mapper) => {
-      createMap(mapper, BorrowHistory, ViewBorrowHistoryDto);
+      createMap(mapper, BorrowHistory, BorrowHistoryVm);
     };
   }
 }

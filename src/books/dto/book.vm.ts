@@ -2,7 +2,7 @@ import { BaseDto } from '@/base.dto';
 import { AutoMap } from '@automapper/classes';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ViewBookDto extends BaseDto {
+export class BookVm extends BaseDto {
   @ApiProperty()
   @AutoMap()
   name: string;

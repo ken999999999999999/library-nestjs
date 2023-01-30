@@ -1,8 +1,8 @@
 import { Body, Delete, Get, Param, Post } from '@nestjs/common';
 import { BooksService } from '@/books/services/books.service';
-import { CreateBookDto } from '@/books//dto/create-book.dto';
+import { CreateBookCommand } from '@/books/dto/create-book.command';
 import { ApiResponse } from '@nestjs/swagger';
-import { ViewBookDto } from '../dto/view-book.dto';
+import { BookVm } from '../dto/book.vm';
 import { Controller } from '@/decorators/controller.decorator';
 
 @Controller('books')
@@ -10,20 +10,20 @@ export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
   @Post()
-  @ApiResponse({ type: ViewBookDto })
-  async create(@Body() createBookDto: CreateBookDto): Promise<ViewBookDto> {
+  @ApiResponse({ type: BookVm })
+  async create(@Body() createBookDto: CreateBookCommand): Promise<BookVm> {
     return this.booksService.create(createBookDto);
   }
 
   @Get()
-  @ApiResponse({ type: [ViewBookDto] })
-  async findAll(): Promise<ViewBookDto[]> {
+  @ApiResponse({ type: [BookVm] })
+  async findAll(): Promise<BookVm[]> {
     return this.booksService.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({ type: ViewBookDto })
-  async findOne(@Param('id') id: string): Promise<ViewBookDto> {
+  @ApiResponse({ type: BookVm })
+  async findOne(@Param('id') id: string): Promise<BookVm> {
     return this.booksService.findOne(id);
   }
 

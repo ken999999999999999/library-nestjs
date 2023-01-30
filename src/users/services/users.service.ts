@@ -3,8 +3,8 @@ import { InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { ViewUserDto } from '../dto/view-user.dto';
+import { CreateUserCommand } from '../dto/create-user.command';
+import { UserVm } from '../dto/user.vm';
 import { User, UserDocument } from '../schemas/user.schema';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class UsersService {
     @InjectMapper() private readonly _mapper: Mapper,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<ViewUserDto> {
+  async create(createUserDto: CreateUserCommand): Promise<UserVm> {
     const user = await User.create(
       createUserDto.username,
       createUserDto.email,
@@ -25,7 +25,7 @@ export class UsersService {
     return this._mapper.mapAsync(
       await this._userModel.create(user),
       User,
-      ViewUserDto,
+      UserVm,
     );
   }
 

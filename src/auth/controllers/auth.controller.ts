@@ -1,6 +1,6 @@
-import { CreateUserDto } from '@/users/dto/create-user.dto';
-import { ViewUserDto } from '@/users/dto/view-user.dto';
-import { SignInDto } from '@/auth/dto/sign-in.dto';
+import { CreateUserCommand } from '@/users/dto/create-user.command';
+import { UserVm } from '@/users/dto/user.vm';
+import { SignInCommand } from '@/auth/dto/sign-in.command';
 import { Body, Post, UseGuards } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import { AuthService } from '@/auth/services/auth.service';
@@ -13,15 +13,15 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('sign-up')
-  @ApiResponse({ type: ViewUserDto })
-  async create(@Body() createUserDto: CreateUserDto): Promise<ViewUserDto> {
+  @ApiResponse({ type: UserVm })
+  async create(@Body() createUserDto: CreateUserCommand): Promise<UserVm> {
     return await this.authService.signUp(createUserDto);
   }
 
   @UseGuards(LocalAuthGuard)
   @Post('sign-in')
-  @ApiResponse({ type: ViewUserDto })
-  async getUser(@Body() signInDto: SignInDto): Promise<ViewUserDto> {
+  @ApiResponse({ type: UserVm })
+  async getUser(@Body() signInDto: SignInCommand): Promise<UserVm> {
     return this.authService.login(signInDto.username);
   }
 }

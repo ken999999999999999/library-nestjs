@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateBookDto } from '@/books/dto/create-book.dto';
+import { CreateBookCommand } from '@/books/dto/create-book.command';
 import { Book, BookDocument } from '@/books/schemas/book.schema';
 import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
-import { ViewBookDto } from '../dto/view-book.dto';
+import { BookVm } from '../dto/book.vm';
 
 @Injectable()
 export class BooksService {
@@ -14,27 +14,27 @@ export class BooksService {
     @InjectMapper() private readonly _mapper: Mapper,
   ) {}
 
-  async create(createBookDto: CreateBookDto): Promise<ViewBookDto> {
+  async create(createBookDto: CreateBookCommand): Promise<BookVm> {
     return this._mapper.mapAsync(
       await this._bookModel.create(createBookDto),
       Book,
-      ViewBookDto,
+      BookVm,
     );
   }
 
-  async findAll(): Promise<ViewBookDto[]> {
+  async findAll(): Promise<BookVm[]> {
     return this._mapper.mapArrayAsync(
       await this._bookModel.find().exec(),
       Book,
-      ViewBookDto,
+      BookVm,
     );
   }
 
-  async findOne(id: string): Promise<ViewBookDto> {
+  async findOne(id: string): Promise<BookVm> {
     return this._mapper.mapAsync(
       await this._bookModel.findOne({ _id: id }),
       Book,
-      ViewBookDto,
+      BookVm,
     );
   }
 

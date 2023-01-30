@@ -1,17 +1,17 @@
 import { BaseDto } from '@/base.dto';
-import { ViewBookDto } from '@/books/dto/view-book.dto';
-import { ViewUserDto } from '@/users/dto/view-user.dto';
+import { BookVm } from '@/books/dto/book.vm';
+import { UserVm } from '@/users/dto/user.vm';
 import { AutoMap } from '@automapper/classes';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ViewBorrowHistoryDto extends BaseDto {
+export class BorrowHistoryVm extends BaseDto {
   @ApiProperty()
-  @AutoMap(() => ViewBookDto)
-  book: ViewBookDto;
+  @AutoMap(() => BookVm)
+  book: BookVm;
 
   @ApiProperty()
-  @AutoMap(() => ViewUserDto)
-  borrowedBy: ViewUserDto;
+  @AutoMap(() => UserVm)
+  borrowedBy: UserVm;
 
   @ApiProperty()
   @AutoMap()
