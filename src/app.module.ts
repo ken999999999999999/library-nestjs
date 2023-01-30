@@ -7,6 +7,7 @@ import { classes } from '@automapper/classes';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from '@/users/users.module';
 import { AuthModule } from '@/auth/auth.module';
+import { RolesModule } from './roles/roles.module';
 
 let envFilePath = '.env.development';
 
@@ -31,6 +32,7 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
     BorrowHistoriesModule,
     UsersModule,
     AuthModule,
+    RolesModule,
   ],
 })
 export class AppModule {}

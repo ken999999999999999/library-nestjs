@@ -3,6 +3,7 @@ import { AutoMap } from '@automapper/classes';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import { Role } from '@/roles/role.enum';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -22,11 +23,15 @@ export class User extends BaseSchema {
   @Prop({ required: true })
   password: string;
 
+  @Prop()
+  roles: Role[];
+
   constructor(username: string, email: string) {
     super();
     this.username = username;
     this.email = email;
     this.normalizedEmail = this.email.toUpperCase();
+    this.roles = [Role.User];
   }
 
   public static async create(
