@@ -18,10 +18,7 @@ export class AuthService {
 
   async validateUser(signInDto: SignInCommand): Promise<UserVm> {
     const user = await this.usersService.findOne(signInDto.username);
-
-    if (
-      !(user && (await User.isPasswordMatch(signInDto.password, user.password)))
-    )
+    if (!(user && (await user.isPasswordMatch(signInDto.password))))
       throw new UnauthorizedException();
     return this._mapper.mapAsync(user, User, UserVm);
   }

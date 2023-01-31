@@ -21,7 +21,7 @@ export class User extends BaseSchema {
   normalizedEmail: string;
 
   @Prop({ required: true })
-  password: string;
+  private password: string;
 
   @Prop()
   roles: Role[];
@@ -49,12 +49,10 @@ export class User extends BaseSchema {
     this.password = await bcrypt.hash(password, await bcrypt.genSalt(round));
   }
 
-  public static isPasswordMatch(
-    inputPassword: string,
-    userPassword: string,
-  ): Promise<boolean> {
-    return bcrypt.compare(inputPassword, userPassword);
+  isPasswordMatch(inputPassword: string): Promise<boolean> {
+    return bcrypt.compare(inputPassword, this.password);
   }
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+UserSchema.loadClass(User);
